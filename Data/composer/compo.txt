@@ -1,0 +1,40 @@
+{"id": "IW6UU8BA", "name": "Perrie Edwards"}
+{"id": "IW6UUBBB", "name": "Leigh-Anne Pinnock"}
+{"id": "IW6UUBBC", "name": "Jade Thirlwall"}
+{"id": "IW6U8A6C", "name": "Tre Jean-Marie"}
+{"id": "IWZFE9DC", "name": "Kamille"}
+{"id": "IWZA6CCW", "name": "Alan Walker"}
+{"id": "IW6W8C09", "name": "Winona Oak"}
+{"id": "IW7ZDAFA", "name": "Anton Rudberg"}
+{"id": "IW6OU8AE", "name": "Julia Karlsson"}
+{"id": "IW6ZUCWO", "name": "Lara Andersson"}
+{"id": "IWZD6FB8", "name": "Kasper"}
+{"id": "IW6ZO0IE", "name": "Tate McRae"}
+{"id": "IW6Z7AA8", "name": "Russell Chell"}
+{"id": "IW6WECOD", "name": "Jacob Kasher Hindlin"}
+{"id": "IWZFDC6A", "name": "Victoria Zaro"}
+{"id": "IWZA7OIA", "name": "K-391"}
+{"id": "IW6O9IDC", "name": "Alexander Pavelich"}
+{"id": "IWZAFZEU", "name": "Jenson Vaughan"}
+{"id": "IW766B8O", "name": "Vetle Riis Jacobsen"}
+{"id": "IW6Z7IZC", "name": "Sander Meland"}
+{"id": "IW6WC6EI", "name": "CORSAK"}
+{"id": "IWZAFU6I", "name": "Georgia Ku"}
+{"id": "IW6OU8WU", "name": "Dwayne Megens"}
+{"id": "IW6U7IWW", "name": "Jonas Jurström"}
+{"id": "IWZA7ADZ", "name": "Sandro Cavazza"}
+{"id": "IW6UB7FU", "name": "Marco Twellmann"}
+{"id": "IW6Z0C8F", "name": "Karl-Frederik Reichhardt"}
+{"id": "IWZFEI80", "name": "Maximillian"}
+{"id": "IW6O7F9A", "name": "Carl Nordström"}
+{"id": "IWZ98796", "name": "The Weeknd"}
+{"id": "IWZFUFUB", "name": "Sebastian Ingrosso"}
+{"id": "IWZ990FC", "name": "Steve Angello"}
+{"id": "IW6WF786", "name": "Axel Hedfors"}
+{"id": "IW6UCDWU", "name": "Rosalía Vila Tobella"}
+{"id": "IW6UC6BU", "name": "Abel \"The Weeknd\" Tesfaye"}
+{"id": "IW6OZIU8", "name": "Noah Goldstein"}
+{"id": "IW6OZ79I", "name": "Adam Feeney"}
+{"id": "IW6UCAZ7", "name": "Alejandro Ramírez"}
+{"id": "IW6CZAU8", "name": "jethro sheeran"}
+{"id": "IW6CZAU9", "name": "Leslie Edward Pridgen"}
