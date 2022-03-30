@@ -1,3 +1,4 @@
+import os
 import requests
 import hashlib
 import hmac
@@ -14,7 +15,7 @@ from pathlib import Path
 
 #########################################################
 ID = "ZOZ0WD80"
-CTIME = "1634197735"
+CTIME = "1648572551"
 INFO_PATH = "/api/v2/song/get/info"
 STREAM_PATH = "/api/v2/song/get/streaming"
 LYRIC_PATH = "/api/v2/lyric/get/lyric"
@@ -22,7 +23,15 @@ PLAYLIST_PATH = "/api/v2/page/get/playlist"
 SECRET_KEY ="2aa2d1c561e809b267f3638c4a307aab"
 API_KEY = "88265e23d4284f25963e6eedac8fbfa3"
 PAGE = "https://zingmp3.vn"
-COOKIE = "_ga=GA1.2.1689943077.1633748883; zpsid=eMqpTcwdFagwSovBAunT1hi0MbKiZrK2lHjJJrtlFLwk76fvMCS1MQypHNGqv0batYn1AasXD1shBreHFiyAGCX7UKO7nIz6o0z4GolPGqwm0XXfL65J; zmp3_sid=c_gzNVP3H665_RvLyaLVQ9-CtZskLbXHgOds0QbNTtwavTK9b2PeUlgSa3JjKsjXmU_-2h0m0qAMrlGljZ1BVvFww4E-I4OZkPVeTTHcIW2ailPiP0; zmp3_rqid_lagecy=MTAzOTM1MDgwNXwxNC4xNjUdUngMTgyLjIwNXxdUngdWxsfDE2MzM3NTE3ODmUsIC3MzY; zmp3_app_version.1=1410; _gid=GA1.2.397836621.1637108688; _zlang=vn; __zi=3000.SSZzejyD0jSbZUgxWaGPoJIFlgNCIW6AQ9sqkju84vnxtElytGrNq7pVu_ZRH5VIV93b-j1EMTGmCZK.1; __zi-legacy=3000.SSZzejyD0jSbZUgxWaGPoJIFlgNCIW6AQ9sqkju84vnxtElytGrNq7pVu_ZRH5VIV93b-j1EMTGmCZK.1; adtimaUserId=3000.SSZzejyD0jSbZUgxWaGPoJIFlgNCIW6AQ9sqkju84vnxtElytGrNq7pVu_ZRH5VIV93b-j1EMTGmCZK.1; _gat=1; zmp3_rqid=MHwxMTMdUngMTg5LjMdUngNTN8djEdUngNC4xMHwxNjM3MTY0NDM2NzmUsICz"
+COOKIE = "_ga=GA1.2.1689943077.1633748883; zpsid=eMqpTcwdFagwSovBAunT1hi0MbKiZrK2lHjJJrtlFLwk76fvMCS1MQypHNGqv0batYn1AasXD1shBreHFiyAGCX7UKO7nIz6o0z4GolPGqwm0XXfL65J; zmp3_sid=c_gzNVP3H665_RvLyaLVQ9-CtZskLbXHgOds0QbNTtwavTK9b2PeUlgSa3JjKsjXmU_-2h0m0qAMrlGljZ1BVvFww4E-I4OZkPVeTTHcIW2ailPiP0; zmp3_app_version.1=1610; __zi=3000.SSZzejyD0jSbZUgxWaGPoJIFlgNCIW6AQ9sqkju84vn_sElysGbNq7ZRu_ZVG5VIU9Jb-jHAMTGmCZK.1; __zi-legacy=3000.SSZzejyD0jSbZUgxWaGPoJIFlgNCIW6AQ9sqkju84vn_sElysGbNq7ZRu_ZVG5VIU9Jb-jHAMTGmCZK.1; _gid=GA1.2.57731014.1648537576; _zlang=vn; adtimaUserId=3000.SSZzejyD0jSbZUgxWaGPoJIFlgNCIW6AQ9sqkju84vn_sElysGbNq7ZRu_ZVG5VIU9Jb-jHAMTGmCZK.1; _gat=1; atmpv=1; zmp3_rqid=MHwxMTMdUngMTYxLjmUsICzLjE2N3x2MS42LjEwfDE2NDg2MTg0NTgwMjU"
+
+
+# Genres, artist, albums dictionary
+GENRES = []
+ARTISTS = []
+TYPES = []
+ALBUMS = []
+ALBUM ={}
 #######################################################
 def Hash256(value):
     h = hashlib.sha256(value.encode('utf-8'))
@@ -32,26 +41,31 @@ def Hash512(value, key):
     return hmac.new(key.encode('utf-8'), value.encode('utf-8'), hashlib.sha512).hexdigest()
 
 def getSongUrl(id, ctime):
-    sig = Hash512(INFO_PATH + Hash256("ctime=" + ctime + "id=" + id + "version=1.4.2"),
+    sig = Hash512(INFO_PATH + Hash256("ctime=" + ctime + "id=" + id + "version=1.6"),
                   SECRET_KEY)
-    return PAGE + INFO_PATH + "?id=" + id + "&ctime=" + ctime + "&version=1.4.2&sig="+ sig + "&apiKey=" + API_KEY
+    return PAGE + INFO_PATH + "?id=" + id + "&ctime=" + ctime + "&version=1.6&sig="+ sig + "&apiKey=" + API_KEY
 
 def getLyricUrl(id, ctime):
-    sig = Hash512(LYRIC_PATH+ Hash256("ctime=" + ctime + "id=" + id + "version=1.4.2"),
+    sig = Hash512(LYRIC_PATH+ Hash256("ctime=" + ctime + "id=" + id + "version=1.6"),
                   SECRET_KEY)
-    return PAGE + LYRIC_PATH+ "?id=" + id + "&BGId=0&ctime=" + ctime + "&version=1.4.2&sig="+ sig + "&apiKey=" + API_KEY
+    return PAGE + LYRIC_PATH+ "?id=" + id + "&BGId=0&ctime=" + ctime + "&version=1.6&sig="+ sig + "&apiKey=" + API_KEY
 
 def getStreamUrl(id, ctime):
-    sig = Hash512(STREAM_PATH+ Hash256("ctime=" + ctime + "id=" + id + "version=1.4.2"),
+    sig = Hash512(STREAM_PATH+ Hash256("ctime=" + ctime + "id=" + id + "version=1.6"),
                   SECRET_KEY)
-    return PAGE + STREAM_PATH+ "?id=" + id + "&ctime=" + ctime + "&version=1.4.2&sig="+ sig + "&apiKey=" + API_KEY
+    return PAGE + STREAM_PATH+ "?id=" + id + "&ctime=" + ctime + "&version=1.6&sig="+ sig + "&apiKey=" + API_KEY
 
 def getPlaylistUrl(id, ctime):
-    sig = Hash512(PLAYLIST_PATH+ Hash256("ctime=" + ctime + "id=" + id + "version=1.4.2"),
+    sig = Hash512(PLAYLIST_PATH+ Hash256("ctime=" + ctime + "id=" + id + "version=1.6"),
                   SECRET_KEY)
-    return PAGE + PLAYLIST_PATH+ "?id=" + id + "&ctime=" + ctime + "&version=1.4.2&sig="+ sig + "&apiKey=" + API_KEY
+    return PAGE + PLAYLIST_PATH+ "?id=" + id + "&ctime=" + ctime + "&version=1.6&sig="+ sig + "&apiKey=" + API_KEY
 #################################################
 def WriteData(path, data):
+    f = open(path, 'a+', encoding='utf-8')
+    obj = json.dumps(data, ensure_ascii=False).encode('utf8')
+    f.write(obj.decode()+"\n")
+
+def WriteSong(path, data):
     f = open(path, 'a+', encoding='utf-8')
     obj = json.dumps(data, ensure_ascii=False).encode('utf8')
     f.write(obj.decode()+"\n")
@@ -60,17 +74,62 @@ def WriteError(path, data):
     f = open(path,'a+', encoding='utf-8')
     obj = json.dumps(data, ensure_ascii=False).encode('utf8')
     f.write(obj.decode() + "\n")
+
+def WriteTotal():
+    global GENRES
+    global ARTISTS
+    global TYPES
+
+    streamFiles = next(os.walk("./Data/streaming"))[2]
+    lyricFiles = next(os.walk("./Data/lyric"))[2]
+    beatFiles = next(os.walk("./Data/beat"))[2]
+    inforFiles = next(os.walk("./Data/song"))[2]
+
+    f = open("./total.txt", 'a+', encoding='utf-8')
+
+    f.write("Stream Files: {} files\n".format(len(streamFiles)))
+    f.write("Lyric Files: {} files\n".format(len(lyricFiles)))
+    f.write("Beat Files: {} files\n".format(len(beatFiles)))
+    f.write("Genres: {} types\n".format(len(GENRES)))
+    f.write("Classes: {} types\n".format(len(TYPES)))
+    f.write("Artists: {}\n".format(len(ARTISTS)))
+
 ####################################################
+def ResolveAlbum(obj):
+
+    # current Album
+    global ALBUM
+    global ALBUMS
+    ALBUM = obj['encodeId']
+
+    albumObj = {"id": obj['encodeId'], "title":obj['title'], "thumbnail": obj['thumbnail'],
+                "releaseDate": obj['releaseDate'], "sortDescription":obj['sortDescription'],
+                "artistsNames":obj['artistsNames'], "like":obj['like'], "listen":obj['listen']}
+    albumPath = "./Data/album/" + obj['encodeId']+ "/"
+
+    if len(ALBUMS) == 0:
+        ALBUMS.append(obj['encodeId'])
+        if not os.path.isdir(albumPath):
+            os.makedirs(albumPath)
+        WriteData(albumPath + "info.txt", albumObj)
+    elif obj['encodeId'] not in ALBUMS:
+        ALBUMS.append(obj['encodeId'])
+        if not os.path.isdir(albumPath):
+            os.makedirs(albumPath)
+        WriteData(albumPath+ "info.txt", albumObj)
 
 def ResolveInfoObj(obj):
+    global ALBUM
+    global ALBUMS
+    global GENRES
+    global ARTISTS
+    global TYPES
 
-
+    # reduce redundant prop
     if "isOffical" in obj:
         del obj['isOffical']
     if "username" in obj:
         del obj['username']
-    if "isWorldWide" in obj:
-        del obj['isWorldWide']
     if "comment" in obj:
         del obj['comment']
     if "isWorldWide" in obj:
@@ -101,34 +160,68 @@ def ResolveInfoObj(obj):
         del obj['listen']
     if "liked" in obj:
         del obj['liked']
-    if "album" in obj:
-        del obj['album']
 
+    # Song Obj to write to Album, Genre, Type
+    writedObj = {'encodeId': obj['encodeId'],'title': obj['title']}
 
+    # Write Artist Data
     listArt = []
     if 'artists' in obj:
         for art in obj['artists']:
             listArt.append({'id': art['id'], 'name':art['name']})
-            WriteData('./Data/art/art.txt', {'id': art['id'],'name': art['name']})
+            artPath = "./Data/art/" + art['id'] + "/"
+            artObj = {'id': art['id'], 'name':art['name'], 'alias': art['alias'],
+                      'thumbnail': art['thumbnail'], 'thumbnailM': art['thumbnailM']}
+            if len(ARTISTS) == 0:
+                ARTISTS.append(art['id'])
+                if not os.path.isdir(artPath):
+                    os.makedirs(artPath)
+                WriteData(artPath + "info.txt", artObj)
+            elif art['id'] not in ARTISTS:
+                ARTISTS.append(art['id'])
+                if not os.path.isdir(artPath):
+                    os.makedirs(artPath)
+                WriteData(artPath + "info.txt", artObj)
+            WriteData(artPath + "songs.txt", writedObj)
     obj['artists'] = listArt
 
-    listComposers = []
-    if 'composers' in obj:
-        for com in obj['composers']:
-            listComposers.append({"id": com['id'], "name":com['name']})
-            WriteData("./Data/composer/compo.txt", {"id": com["id"],"name": com["name"]})
-    obj["composers"] =listComposers
 
-
+    # Write Genres Data
     listGenres = []
     types =""
     if 'genres' in obj:
         for gen in obj['genres']:
             types+=gen['alias']+"-"
             listGenres.append({"id": gen['id'], "name":gen['name']})
-            WriteData("./Data/genre/genre.txt", {"id": gen["id"],"name": gen["name"]})
+            genPath = "./Data/genre.txt"
+            genreFile = "./Data/genre/" + gen['id'] + ".txt"
+            genObj = {"id": gen['id'], "name":gen['name']}
+            if len(GENRES) == 0:
+                GENRES.append(gen['id'])
+                WriteData(genPath, genObj)
+            elif gen['id'] not in GENRES:
+                GENRES.append(gen['id'])
+                WriteData(genPath, genObj)
+            WriteData(genreFile, writedObj)
     obj["genres"] =listGenres
+
+    # Write Type Data for classification
     obj["types"]= types
+    typeFile = "./Data/type.txt"
+    typePath = "./Data/type/" + types + ".txt"
+    if len(TYPES) == 0:
+        TYPES.append(types)
+        typeObj = {"id": (len(TYPES) - 1), "title":types}
+        WriteData(typeFile, typeObj)
+    elif types not in TYPES:
+        TYPES.append(types)
+        typeObj = {"id": (len(TYPES) - 1), "title":types}
+        WriteData(typeFile, typeObj)
+    WriteData(typePath, writedObj)
+
+    # Add track for album
+    albumPath = "./Data/album/"  + ALBUM + "/songs.txt"
+    WriteData(albumPath, writedObj)
 
     return obj
 
@@ -187,7 +280,7 @@ def process_Streaming(id, cook):
                 print("\nCOOKIE Expired")
                 global COOKIE
                 cok = res.headers["Set-Cookie"]
-                COOKIE = cok
+                COOKIE = cook
                 return process_Streaming( id, COOKIE)
             elif obj['err']== -1023:
                 return id
@@ -218,11 +311,12 @@ def process_Info(id, cook):
         res = requests.get(url,headers={"cookie":cook})
         obj = res.json()
         try:
+
             if obj['err'] == -201:
                 print("\nCOOKIE Expired")
                 global COOKIE
                 cok = res.headers["Set-Cookie"]
-                COOKIE = cok
+                COOKIE = cook
                 return process_Info(id, COOKIE)
             elif obj['err']== -1023:
                 return id
@@ -233,7 +327,6 @@ def process_Info(id, cook):
                 if not(myFile.is_file()):
                     rObj = ResolveInfoObj(obj['data'])
                     WriteData("./Data/song/" + rObj['encodeId'] +".txt", rObj)
-                    WriteData("./Data/genre/" + rObj['types'], rObj)
             else:
                 print("Some error occur")
                 WriteError("error.txt", obj)
@@ -318,13 +411,14 @@ def AnalysePlaylist(playlistID,cook):
             print("\nCOOKIE expired")
             global COOKIE
             cok = res.headers["Set-Cookie"]
-            COOKIE = cok
+            COOKIE = cook
             return AnalysePlaylist(playlistID)
         elif obj['err'] == -1023:
             print("\nPlaylist not found: " + playlistID)
             return playlistID
         elif obj['err'] == 0:
             data = obj['data']
+            ResolveAlbum(data)
             songs = data['song']
             for song in songs['items']:
                     threaded_process_range(1, song['encodeId'])
@@ -334,13 +428,14 @@ def AnalysePlaylist(playlistID,cook):
         return playlistID
 
 def Clone():
-    #playlistID = "ZOUBOE9F";
-    #AnalysePlaylist(playlistID)
+    playlistID = "ZOUBOE9F";
+    AnalysePlaylist(playlistID,COOKIE)
     playListFile = open('Playlist.txt', 'r')
     Lines = playListFile.readlines()
 
     for line in Lines:
         print("\nPlaylist ID: " + line.strip())
         AnalysePlaylist(line.strip(),COOKIE)
+    WriteTotal()
 if  __name__ == '__main__':
    Clone()
