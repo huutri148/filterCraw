@@ -23,7 +23,7 @@ PLAYLIST_PATH = "/api/v2/page/get/playlist"
 SECRET_KEY ="2aa2d1c561e809b267f3638c4a307aab"
 API_KEY = "88265e23d4284f25963e6eedac8fbfa3"
 PAGE = "https://zingmp3.vn"
-COOKIE = "_ga=GA1.2.1689943077.1633748883; zpsid=eMqpTcwdFagwSovBAunT1hi0MbKiZrK2lHjJJrtlFLwk76fvMCS1MQypHNGqv0batYn1AasXD1shBreHFiyAGCX7UKO7nIz6o0z4GolPGqwm0XXfL65J; zmp3_sid=c_gzNVP3H665_RvLyaLVQ9-CtZskLbXHgOds0QbNTtwavTK9b2PeUlgSa3JjKsjXmU_-2h0m0qAMrlGljZ1BVvFww4E-I4OZkPVeTTHcIW2ailPiP0; zmp3_app_version.1=1610; __zi=3000.SSZzejyD0jSbZUgxWaGPoJIFlgNCIW6AQ9sqkju84vn_sElysGbNq7ZRu_ZVG5VIU9Jb-jHAMTGmCZK.1; __zi-legacy=3000.SSZzejyD0jSbZUgxWaGPoJIFlgNCIW6AQ9sqkju84vn_sElysGbNq7ZRu_ZVG5VIU9Jb-jHAMTGmCZK.1; _gid=GA1.2.57731014.1648537576; _zlang=vn; adtimaUserId=3000.SSZzejyD0jSbZUgxWaGPoJIFlgNCIW6AQ9sqkju84vn_sElysGbNq7ZRu_ZVG5VIU9Jb-jHAMTGmCZK.1; _gat=1; atmpv=1; zmp3_rqid=MHwxMTMdUngMTYxLjmUsICzLjE2N3x2MS42LjEwfDE2NDg2MTg0NTgwMjU"
+COOKIE = "_ga=GA1.2.1689943077.1633748883; zpsid=eMqpTcwdFagwSovBAunT1hi0MbKiZrK2lHjJJrtlFLwk76fvMCS1MQypHNGqv0batYn1AasXD1shBreHFiyAGCX7UKO7nIz6o0z4GolPGqwm0XXfL65J; zmp3_sid=c_gzNVP3H665_RvLyaLVQ9-CtZskLbXHgOds0QbNTtwavTK9b2PeUlgSa3JjKsjXmU_-2h0m0qAMrlGljZ1BVvFww4E-I4OZkPVeTTHcIW2ailPiP0; __zi=3000.SSZzejyD0jSbZUgxWaGPoJIFlgNCIW6AQ9sqkju84vn_sElysGbNq7ZRu_ZVG5VIU9Jb-jHAMTGmCZK.1; __zi-legacy=3000.SSZzejyD0jSbZUgxWaGPoJIFlgNCIW6AQ9sqkju84vn_sElysGbNq7ZRu_ZVG5VIU9Jb-jHAMTGmCZK.1; _gid=GA1.2.57731014.1648537576; _zlang=vn; adtimaUserId=3000.SSZzejyD0jSbZUgxWaGPoJIFlgNCIW6AQ9sqkju84vn_sElysGbNq7ZRu_ZVG5VIU9Jb-jHAMTGmCZK.1; zmp3_app_version.1=1611; _gat=1; atmpv=1; zmp3_rqid=MHwxMTMdUngMTYxLjmUsIC3LjgyfHYxLjYdUngMTF8MTY0ODY0NDYzNzk0Mw"
 
 
 # Genres, artist, albums dictionary
